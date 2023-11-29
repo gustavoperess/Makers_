@@ -11,3 +11,19 @@ CREATE TABLE test_table (id SERIAL PRIMARY KEY, name VARCHAR(255));
 
 -- Finally, we add any records that are needed for the tests to run
 INSERT INTO test_table (name) VALUES ('first_record');
+
+
+CREATE TABLE cohorts (
+  id SERIAL PRIMARY KEY,
+  name text,
+  starting_date date
+);
+
+CREATE TABLE cohort (
+  id SERIAL PRIMARY KEY,
+  name text,
+
+  cohort_id int,
+  constraint fk_cohort foreign key(cohort_id)
+    references cohorts(id)
+);
