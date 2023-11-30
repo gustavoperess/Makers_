@@ -20,4 +20,27 @@ def test_to_check_for_a_single_album(db_connection):
     
     albums = a_repository.find(2)
     assert albums == Post(2, "title02", "content02", 245, None)
+
+def test_to_create(db_connection):
+    db_connection.seed("seeds/social_network.sql") # Seed our database with some test data
+    repository = PostRepository(db_connection) # Create a new ArtistRepository
     
+    post = Post(4, "title04", "content04",55, None)
+    assert repository.create(post) == None
+    assert repository.all() == [
+        Post(1, "title01", "content01", 145, None),
+        Post(2, "title02", "content02", 245, None),
+        Post(3, "title03", "content03", 45, None),
+        Post(4, "title04", "content04",55, None)
+        
+    ]
+
+def test_to_delete(db_connection):
+    db_connection.seed("seeds/social_network.sql") # Seed our database with some test data
+    repository = PostRepository(db_connection) # Create a new ArtistRepository
+   
+    assert repository.delete(1) == None
+    assert repository.all() == [
+        Post(2, "title02", "content02", 245, None),
+        Post(3, "title03", "content03", 45, None),
+    ]
