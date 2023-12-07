@@ -88,10 +88,10 @@ def test_create_artist(page, test_web_address, db_connection):
     page.goto(f"http://{test_web_address}/artists")
     page.click("text = Add new artist")
     page.fill("input[name=name]", "Test Name")
-    page.fill("input[name=release_year]", "Rock")
+    page.fill("input[name=genre]", "Rock")
     page.click("text = add artist")
     title_element = page.locator(".t-name")
-    expect(title_element).to_have_text("Album: Test Name")
+    expect(title_element).to_have_text("Test Name")
     release_year_element = page.locator(".t-genre")
     expect(release_year_element).to_have_text("Rock")
 
