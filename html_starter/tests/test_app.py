@@ -55,3 +55,28 @@ def test_get_artist_only(page, test_web_address, db_connection):
      page.click('text=Get all artist')
      a_tag = page.locator("(//h2/a)[1]")
      expect(a_tag).to_have_text("Pixies")
+
+
+def test_create_album(page, test_web_address, db_connection):
+    db_connection.seed("seeds/albums.sql")
+    page.goto(f"http://{test_web_address}/albums")
+    page.click("text = Add new album")
+    page.fill("input[name=title]", "Test Album")
+    page.fill("input[name=release_year]", "1998")
+    page.fill("input[name=artist_id]", "1")
+    page.click("text = add album")
+    title_element = page.locator(".t-title")
+    expect(title_element).to_have_text("Album: Test Album")
+    release_year_element = page.locator(".t-release_year")
+    expect(release_year_element).to_have_text("1998")
+
+
+
+def test_attemp_creat_book_with_errors(page, test_web_address, db_connection):
+     db_connection.seed("seeds/albums.sql")
+     page.goto(f"http://{test_web_address}/albums")
+     page.click("text = Add new album")
+     page.click("text = add album")
+     
+     erros_tag = page.locator(".t-errors")
+     expect(erros_tag).to_have_text("Your form contain erros: Title can't be blank, Release year can't be blank")

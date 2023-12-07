@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, redirect, render_template
 from lib.database_connection import get_flask_database_connection
 from lib.music_library_repository import MusicLibraryRepository
 from lib.music_library import MusicLibrary
@@ -68,6 +68,25 @@ def get_single_artist():
     return render_template("artists/artists.html", artists=artists)
 
 
+@app.route('/albums/new', methods=['GET'])
+def get_new_album():
+    return render_template("albums/new.html")
+
+
+@app.route('/albums', methods=['POST'])
+def creat_album():
+    connection = get_flask_database_connection(app)
+    repository = MusicLibraryRepository(connection)
+    title = request.form["title"]
+    release_year = request.form["release_year"]
+    artist_id = request.form["artist_id"]
+    album = MusicLibrary(None, title, release_year, artist_id)
+
+    if not album.is_valid():
+        error = album.generate_errors()
+        return render_template("albums/new.html", errors=error)
+    repository.create(album)
+    return redirect(f"albums/{album.id}")
 
 # This imports some more example routes for you to see how they work
 # You can delete these lines if you don't need them.

@@ -23,10 +23,12 @@ class MusicLibraryRepository:
         return MusicLibrary(row["id"], row["title"], row["release_year"], row["artist_id"])
 
     def create(self, albums):
-        self._connection.execute('INSERT INTO albums (title, release_year, artist_id) VALUES (%s, %s, %s)', [
+        rows = self._connection.execute('INSERT INTO albums (title, release_year, artist_id) VALUES (%s, %s, %s) RETURNING id', [
                                  albums.title, albums.release_year, albums.artist_id])
         
-        return None
+        row = rows[0]
+        albums.id = row["id"]
+        return albums
     
     
     # Delete an album by its id
