@@ -80,3 +80,28 @@ def test_attemp_creat_book_with_errors(page, test_web_address, db_connection):
      
      erros_tag = page.locator(".t-errors")
      expect(erros_tag).to_have_text("Your form contain erros: Title can't be blank, Release year can't be blank")
+    
+
+
+def test_create_artist(page, test_web_address, db_connection):
+    db_connection.seed("seeds/albums.sql")
+    page.goto(f"http://{test_web_address}/artists")
+    page.click("text = Add new artist")
+    page.fill("input[name=name]", "Test Name")
+    page.fill("input[name=release_year]", "Rock")
+    page.click("text = add artist")
+    title_element = page.locator(".t-name")
+    expect(title_element).to_have_text("Album: Test Name")
+    release_year_element = page.locator(".t-genre")
+    expect(release_year_element).to_have_text("Rock")
+
+
+def test_attemp_creat_artist_with_errors(page, test_web_address, db_connection):
+     db_connection.seed("seeds/albums.sql")
+     page.goto(f"http://{test_web_address}/artists")
+     page.click("text = Add new artist")
+     page.click("text = add artist")
+     
+     erros_tag = page.locator(".t-errors")
+     expect(erros_tag).to_have_text("Your form contain erros: Name can't be blank, Genre year can't be blank")
+    

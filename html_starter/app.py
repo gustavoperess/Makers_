@@ -88,6 +88,29 @@ def creat_album():
     repository.create(album)
     return redirect(f"albums/{album.id}")
 
+
+@app.route('/artists/new', methods=['GET'])
+def get_new_artists():
+    return render_template("artists/new.html")
+
+
+@app.route('/artists', methods=['POST'])
+def create_artist():
+    connection = get_flask_database_connection(app)
+    repository = ArtistRepository(connection)
+    name = request.form["name"]
+    genre = request.form["genre"]
+    artist = Artist(None, name, genre)
+
+    if not artist.is_valid():
+        error = artist.generate_errors()
+        return render_template("artists/new.html", errors=error)
+    repository.create(artist)
+    return redirect(f"artist/{artist.id}")
+
+
+
+
 # This imports some more example routes for you to see how they work
 # You can delete these lines if you don't need them.
 from example_routes import apply_example_routes
