@@ -1,5 +1,5 @@
-Introduction
-This documentation provides an overview of a simple Flask website created to showcase your ability to use Flask, create forms, conduct tests with pytest, and interact with a database using SQL. The website manages a music library, allowing users to view albums and artists, add new albums, and create new artists.
+
+This documentation provides an overview of a simple Flask website created to showcase my ability to use Flask, create forms, conduct tests with pytest, and interact with a database using SQL. The website manages a music library, allowing users to view albums and artists, add new albums, and create new artists.
 
 Project Structure
 The project structure consists of the following main components:
