@@ -1,69 +1,52 @@
-# Flask HTML Web & Database Project Starter
+ntroduction
+This documentation provides an overview of a simple Flask website created to showcase your ability to use Flask, create forms, conduct tests with pytest, and interact with a database using SQL. The website manages a music library, allowing users to view albums and artists, add new albums, and create new artists.
 
-This is a starter project for you to use to start your Flask HTML web & database
-projects.
+Project Structure
+The project structure consists of the following main components:
 
-It contains quite a lot of example code. You can use this to see how the various
-parts of the project work, or you can delete it and start from scratch.
-
-There are two videos to support:
-
-* [A demonstration of setting up the project](https://www.youtube.com/watch?v=YStsRfMVx44&t=0s)
-* [A walkthrough of the project codebase](https://www.youtube.com/watch?v=YStsRfMVx44&t=314s) 
-
-## Setup
-
-```shell
-# Clone the repository to your local machine
-; git clone git@github.com:makersacademy/web-applications-in-python-project-starter-html.git YOUR_PROJECT_NAME
-
-# Or, if you don't have SSH keys set up
-; git clone https://github.com/makersacademy/web-applications-in-python-project-starter-html.git YOUR_PROJECT_NAME
-
-# Enter the directory
-; cd YOUR_PROJECT_NAME
-
-# Install dependencies and set up the virtual environment
-; pipenv install
-
-# Activate the virtual environment
-; pipenv shell
-
-# Install the virtual browser we will use for testing
-; playwright install
-# If you have problems with the above, contact your coach
-
-# Create a test and development database
-; createdb YOUR_PROJECT_NAME
-; createdb YOUR_PROJECT_NAME_test
-
-# Open lib/database_connection.py and change the database names
-; open lib/database_connection.py
-
-# Seed the development database (ensure you have run `pipenv shell` first)
-; python seed_dev_database.py
-
-# Run the tests (with extra logging)
-; pytest -sv
-
-# Run the app
-; python app.py
-# Now visit http://localhost:5001/emoji in your browser
-```
-
-If you would like to remove the example code:
-
-```shell
-; ./remove_example_code.sh
-```
+app.py: The main Flask application file containing route definitions and server configuration.
+lib: A directory containing custom Python modules for database connection, repositories, and model classes.
+templates: A directory containing HTML templates for rendering pages.
+tests: A directory containing test files for pytest.
+Dependencies
+Make sure to install the necessary dependencies by running the following command:
 
 
-<!-- BEGIN GENERATED SECTION DO NOT EDIT -->
+pip install Flask pytest
+Running the Application
+To run the application, execute the following command in the terminal:
 
----
 
-**How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😀)  
-Click an emoji to tell us.
+python app.py
+The application will run on http://localhost:5001/ by default.
 
-<!-- END GENERATED SECTION DO NOT EDIT -->
+Routes
+GET /emoji
+
+Returns a smiley face in HTML.
+Example: http://localhost:5001/emoji
+GET /goodbye
+
+Returns a goodbye message.
+Example: http://localhost:5001/goodbye
+GET /albums
+
+Displays a list of all albums.
+Example: http://localhost:5001/albums
+GET /albums/int:id
+
+Displays details of a specific album.
+Example: http://localhost:5001/albums/1
+GET /details/int:id
+
+Displays artists and albums associated with a specific artist ID.
+Example: http://localhost:5001/details/1
+GET /artist/int:id
+
+Displays details of a specific artist.
+Example: http://localhost:5001/artist/1
+GET /artists
+
+Displays a list of all artists.
+Example: http://localhost:5001/artists
+GET /albums/new
