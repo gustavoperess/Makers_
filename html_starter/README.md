@@ -1,4 +1,4 @@
-ntroduction
+Introduction
 This documentation provides an overview of a simple Flask website created to showcase your ability to use Flask, create forms, conduct tests with pytest, and interact with a database using SQL. The website manages a music library, allowing users to view albums and artists, add new albums, and create new artists.
 
 Project Structure
@@ -47,6 +47,3 @@ Displays details of a specific artist.
 Example: http://localhost:5001/artist/1
 GET /artists
 
-Displays a list of all artists.
-Example: http://localhost:5001/artists
-GET /albums/new
