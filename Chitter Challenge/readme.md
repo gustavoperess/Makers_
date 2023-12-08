@@ -1,6 +1,5 @@
-In this challenge I am writing a small Twitter clone that will allow the users to post messages to a public stream.
-Requirments - A database (SQL), psycopg package and the repository classes. Flask, Pytest, HTML. 
 
+<<<<<<< HEAD
 
 
 ## User Story
@@ -40,3 +39,5 @@ I want to receive an email if I am tagged in a Peep
 
 ---
 :)
+=======
+>>>>>>> 75f13bf3560c0a20fa192ed526d26feac35ede3a
