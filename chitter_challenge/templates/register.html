@@ -4,16 +4,11 @@
     <title>Chitter Main Page</title>
   </head>
     <h1>Register</h1>
-   <form >
-    <p>
-        <label for="user_name">User Name</label><br>
-        <input type="text" name="user_name" id="user_name">
-    </p>
-    <p>
-        <label for="password">Password</label><br>
-        <input type="password" name="password" id="password">
-    </p>
-    <input type="submit" value="create account">
+    <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      {{ form.username }}<br>
+      {{ form.password }}<br>
+      {{ form.submit }} <br>
    </form>
   <body>
   </body>

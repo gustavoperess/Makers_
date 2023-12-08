@@ -33,7 +33,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
-
 @app.route('/', methods=['GET'])
 def main_page():
     form = LoginForm()

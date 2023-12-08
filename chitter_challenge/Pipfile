@@ -10,6 +10,10 @@ flask = "*"
 flask-login = "*"
 flask-wtf = "*"
 flask-bcrypt = "*"
+pytest-playwright = "*"
+pytest-xprocess = "*"
+py = "*"
+autopep8 = "*"
 
 [dev-packages]
 

@@ -1,11 +1,13 @@
 from playwright.sync_api import Page, expect
 
 
+
+
 def test_create_new_user(page, test_web_address, db_connection):
     db_connection.seed("seeds/users.sql")
     page.goto(f"http://{test_web_address}/")
     page.click("text = sign up")
-    # page.fill("input[name=title]", "Test Album")
+    page.fill("input[name=title]", "Test Album")
     # page.fill("input[name=release_year]", "1998")
     # page.fill("input[name=artist_id]", "1")
     # page.click("text = add album")
