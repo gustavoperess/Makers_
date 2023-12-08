@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from lib.database_connection import get_flask_database_connection
 from lib.user_repository import UserRepository
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
@@ -20,17 +20,18 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def main_page():
     form = LoginForm()
     if form.validate_on_submit():
-        print("hello")
-        users = UserRepository.all()
+        connection = get_flask_database_connection(app)
+        repository = UserRepository(connection)
+        users = repository.all()
         for user in users:
-            if user.user_name == form.username.data:
-                if bcrypt.check_password_hash(user.user_password, form.password.data):
-                    login_user(user)
-                    return redirect(url_for('login_page'))
+            if user.user_name == form.username.data and bcrypt.check_password_hash(user.user_password, form.password.data):
+                login_user(user)
+                return redirect(url_for('login_page'))
+        flash('Invalid username or password', 'danger')  
     return render_template('index.html', form=form)
 
 
@@ -47,6 +48,7 @@ def register_page():
         connection = get_flask_database_connection(app)
         repository = UserRepository(connection)
         hashed_password = bcrypt.generate_password_hash(form.password.data) 
+        print(f'Hashed Password: {hashed_password}')
         new_user = User(None, user_name=form.username.data, user_password=hashed_password)
         repository.create(new_user)
         return redirect(url_for('main_page'))
