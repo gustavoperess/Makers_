@@ -1,5 +1,5 @@
 
-<<<<<<< HEAD
+
 
 
 ## User Story
@@ -40,4 +40,4 @@ I want to receive an email if I am tagged in a Peep
 ---
 :)
 =======
->>>>>>> 75f13bf3560c0a20fa192ed526d26feac35ede3a
+
