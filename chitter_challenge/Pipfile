@@ -7,6 +7,9 @@ name = "pypi"
 pytest = "*"
 psycopg = "*"
 flask = "*"
+flask-login = "*"
+flask-wtf = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 
