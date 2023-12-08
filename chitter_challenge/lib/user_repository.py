@@ -4,8 +4,7 @@ class UserRepository:
     
     def __init__(self, connection):
         self._connection = connection
-        
-    
+         
     def all(self):
         rows = self._connection.execute('SELECT * from users')
         users = []
@@ -22,3 +21,14 @@ class UserRepository:
         return User(row['id'], row['user_name'], row['user_password'])
         
     
+    def create(self, user):
+        rows = self._connection.execute('INSERT INTO users (user_name, user_password) VALUES (%s, %s) RETURNING id', [
+                                        user.user_name, user.user_password])
+        
+        row = rows[0]
+        user.id = row["id"]
+        return user
+    
+    def delete(self, id):
+        self._connection.execute('DELETE FROM users WHERE id = %s', [id])
+        return None
