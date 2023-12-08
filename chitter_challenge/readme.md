@@ -3,7 +3,7 @@ Requirments - A database (SQL), psycopg package and the repository classes. Flas
 
 Below is the user story
 
-
+```
 As a Maker
 So that I can let people know what I am doing
 I want to post a message (peep) to chitter
@@ -33,3 +33,4 @@ FUTURE FETURE
 As a Maker
 So that I can stay constantly tapped in to the shouty box of Chitter
 I want to receive an email if I am tagged in a Peep
+```
