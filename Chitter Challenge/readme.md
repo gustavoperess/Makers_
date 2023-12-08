@@ -1,10 +1,10 @@
 In this challenge I am writing a small Twitter clone that will allow the users to post messages to a public stream.
 Requirments - A database (SQL), psycopg package and the repository classes. Flask, Pytest, HTML. 
 
-<details>
-<summary>Click to expand</summary>
 
 
+## User Story
+```
 As a Maker
 So that I can let people know what I am doing
 I want to post a message (peep) to chitter
@@ -35,4 +35,8 @@ As a Maker
 So that I can stay constantly tapped in to the shouty box of Chitter
 I want to receive an email if I am tagged in a Peep
 
-</details>
+```
+
+
+---
+:)
