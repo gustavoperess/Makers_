@@ -9,6 +9,3 @@ CREATE TABLE users (
     user_password VARCHAR(255)
 );
 
-
-INSERT INTO users (user_name, user_password) VALUES ('Gustavo', 'Gustavo123');
-INSERT INTO users (user_name, user_password) VALUES ('Ashley', 'Ashley123');

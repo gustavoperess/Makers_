@@ -33,7 +33,7 @@ def main_page():
                 login_user(user)      
                 return redirect(url_for('login_page'))
         else:
-            print("User not in the system")
+            flash("User not in the system")
     return render_template('index.html', form=form)
 
 
@@ -63,8 +63,14 @@ def register_page():
         repository = UserRepository(connection)
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         new_user = User(None, user_name=form.username.data, user_password=hashed_password)
-        repository.create(new_user)
-        return redirect(url_for('main_page'))
+        success, user = repository.create(new_user)
+        print(success)
+        if success:
+            flash("Registration successful")
+            print(f"User ID: {user.id}, Username: {user.user_name}")
+            return redirect(url_for('main_page'))
+        else:
+            flash("Username already exists. Please choose a different username.")
     return render_template('register.html', form=form)
 
 
