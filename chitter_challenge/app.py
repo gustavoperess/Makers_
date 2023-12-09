@@ -28,11 +28,12 @@ def main_page():
     if form.validate_on_submit():
         connection = get_flask_database_connection(app)
         repository = UserRepository(connection)
+        print("HERE")
         user = repository.find_by_name(form.username.data)
-        print(user)
-        if user:
-            if bcrypt.check_password_hash(user.user_password.encode('utf-8'), form.password.data.encode('utf-8')):
-                login_user(user)
+        print(f"USER USER NAME NONE? {user.user_name == None}")
+        print(f"USER USER NAME NONE? {user}")
+        if user and bcrypt.check_password_hash(user.user_password.encode('utf-8'), form.password.data.encode('utf-8')):
+                login_user(user)      
                 return redirect(url_for('login_page'))
     return render_template('index.html', form=form)
 
@@ -45,6 +46,14 @@ def login_page():
     repository = UserRepository(connection)
     user = repository.find(1)
     return render_template('login.html', user=user)
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('main_page'))
+
 
 
 @app.route('/register', methods=['GET', 'POST'])

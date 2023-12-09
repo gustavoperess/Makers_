@@ -18,14 +18,21 @@ class UserRepository:
             'SELECT * from users WHERE id = %s', [user_id])
         
         row = row[0]
-        return User(row['id'], row['user_name'], row['user_password'])
+        if row:
+            return User(row['id'], row['user_name'], row['user_password'])
+        else:
+            return None
+    
     
     def find_by_name(self, user_name):
         row = self._connection.execute(
             'SELECT * from users WHERE user_name = %s', [user_name])
         
         row = row[0]
-        return User(row['id'], row['user_name'], row['user_password'])
+        if row:
+            return User(row['id'], row['user_name'], row['user_password'])
+        else:
+            return None
     
     
     def create(self, user):
