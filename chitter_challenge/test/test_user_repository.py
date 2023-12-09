@@ -45,6 +45,19 @@ def test_find_user_by_name(db_connection):
 
 
 """
+When we call UserRepository#find_by_name and the name is not found returns None
+We remove a record from the database.
+"""
+
+def test_find_user_by_name_with_none(db_connection):
+    db_connection.seed("seeds/users.sql")  # Seed our database with some test data
+    repository = UserRepository(db_connection)  # Create a new ArtistRepository
+
+    user = repository.find_by_name("notInTheDatabase")
+    assert user == None
+
+
+"""
 When we call UserRepository#create
 We create a record from the database.
 """
@@ -77,3 +90,5 @@ def test_delete_record(db_connection):
     assert result == [
         User(1, 'Gustavo', 'Gustavo123'),
     ]
+
+

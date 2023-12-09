@@ -14,22 +14,23 @@ class UserRepository:
         return users
     
     def find(self, user_id):
-        row = self._connection.execute(
+        rows = self._connection.execute(
             'SELECT * from users WHERE id = %s', [user_id])
         
-        row = row[0]
-        if row:
+        if rows:
+            row = rows[0]
             return User(row['id'], row['user_name'], row['user_password'])
         else:
             return None
     
     
+    
     def find_by_name(self, user_name):
-        row = self._connection.execute(
+        rows = self._connection.execute(
             'SELECT * from users WHERE user_name = %s', [user_name])
         
-        row = row[0]
-        if row:
+        if rows:
+            row = rows[0]
             return User(row['id'], row['user_name'], row['user_password'])
         else:
             return None

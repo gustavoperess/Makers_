@@ -28,13 +28,12 @@ def main_page():
     if form.validate_on_submit():
         connection = get_flask_database_connection(app)
         repository = UserRepository(connection)
-        print("HERE")
         user = repository.find_by_name(form.username.data)
-        print(f"USER USER NAME NONE? {user.user_name == None}")
-        print(f"USER USER NAME NONE? {user}")
         if user and bcrypt.check_password_hash(user.user_password.encode('utf-8'), form.password.data.encode('utf-8')):
                 login_user(user)      
                 return redirect(url_for('login_page'))
+        else:
+            print("User not in the system")
     return render_template('index.html', form=form)
 
 
