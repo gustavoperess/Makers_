@@ -37,7 +37,6 @@ def main_page():
     return render_template('index.html', form=form)
 
 
-
 @app.route('/login', methods=['GET', 'POST'])
 @login_required
 def login_page():
@@ -49,7 +48,6 @@ def login_page():
 def logout():
     logout_user()
     return redirect(url_for('main_page'))
-
 
 
 @app.route('/register', methods=['GET', 'POST'])
