@@ -33,9 +33,14 @@ class UserRepository:
                                         user.user_name, user.user_password])
         
         row = rows[0]
+        user.id = self._generate_next_id()
         user.id = row["id"]
         return user
     
     def delete(self, id):
         self._connection.execute('DELETE FROM users WHERE id = %s', [id])
         return None
+    
+    def _generate_next_id(self):
+        users = self.all()
+        return max([user.id for user in users], default=0) + 1

@@ -29,10 +29,8 @@ def main_page():
         connection = get_flask_database_connection(app)
         repository = UserRepository(connection)
         user = repository.find_by_name(form.username.data)
+        print(user)
         if user:
-            # print("Form Password Data:", form.password.data, user.user_password)
-            # print(form.password.data == user.user_password)
-            # print(user.user_password.encode('utf-8') == form.password.data.encode('utf-8'))
             if bcrypt.check_password_hash(user.user_password.encode('utf-8'), form.password.data.encode('utf-8')):
                 login_user(user)
                 return redirect(url_for('login_page'))
@@ -43,7 +41,10 @@ def main_page():
 @app.route('/login', methods=['GET', 'POST'])
 @login_required
 def login_page():
-    return render_template('login.html')
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    user = repository.find(1)
+    return render_template('login.html', user=user)
 
 
 @app.route('/register', methods=['GET', 'POST'])
