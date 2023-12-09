@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from lib.database_connection import get_flask_database_connection
 from lib.user_repository import UserRepository
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from lib.user import User
 from lib.forms import LoginForm, RegisterForm
 from flask_bcrypt import Bcrypt
@@ -14,11 +14,13 @@ app.config['SECRET_KEY'] = 'thisisasecretkey'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "login"
+login_manager.login_view = "login_page"
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    return repository.find(int(user_id))
 
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
@@ -29,12 +31,13 @@ def main_page():
         user = repository.find_by_name(form.username.data)
         if user:
             if bcrypt.check_password_hash(user.user_password, form.password.data):
+                login_user(user)
                 return redirect(url_for('login_page'))
     return render_template('index.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def login_page():
     return render_template('login.html')
 
@@ -50,6 +53,8 @@ def register_page():
         repository.create(new_user)
         return redirect(url_for('main_page'))
     return render_template('register.html', form=form)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5001)))
