@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS users_id_seq;
-DROP TABLE IF EXISTS users_chitters;
-DROP SEQUENCE IF EXISTS users_chitters_id_seq;
+DROP TABLE IF EXISTS posts;
+DROP SEQUENCE IF EXISTS posts_id_seq;
 
 CREATE SEQUENCE users_id_seq;
 
@@ -13,11 +13,11 @@ CREATE TABLE users (
 
 CREATE SEQUENCE users_chitters_id_seq;
 
-CREATE TABLE users_chitters (
+CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     post_title VARCHAR(255),
     post_content VARCHAR(255),
-    post_number_of_views int, 
+    post_number_of_views int,
     
     user_id int,
     CONSTRAINT fk_user FOREIGN KEY (user_id)
