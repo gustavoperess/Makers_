@@ -41,10 +41,7 @@ def main_page():
 @app.route('/login', methods=['GET', 'POST'])
 @login_required
 def login_page():
-    connection = get_flask_database_connection(app)
-    repository = UserRepository(connection)
-    user = repository.find(1)
-    return render_template('login.html', user=user)
+    return render_template('login.html')
 
 
 @app.route('/logout', methods=['GET', 'POST'])
