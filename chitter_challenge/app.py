@@ -67,7 +67,6 @@ def register_page():
         print(success)
         if success:
             flash("Registration successful")
-            print(f"User ID: {user.id}, Username: {user.user_name}")
             return redirect(url_for('main_page'))
         else:
             flash("Username already exists. Please choose a different username.")
