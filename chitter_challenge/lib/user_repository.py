@@ -19,7 +19,15 @@ class UserRepository:
         
         row = row[0]
         return User(row['id'], row['user_name'], row['user_password'])
+    
+    def find_by_name(self, user_name):
+        row = self._connection.execute(
+            'SELECT * from users WHERE user_name = %s', [user_name])
         
+        row = row[0]
+        return User(row['id'], row['user_name'], row['user_password'])
+    
+    
     
     def create(self, user):
         rows = self._connection.execute('INSERT INTO users (user_name, user_password) VALUES (%s, %s) RETURNING id', [

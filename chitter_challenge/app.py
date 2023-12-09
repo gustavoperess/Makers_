@@ -26,17 +26,15 @@ def main_page():
     if form.validate_on_submit():
         connection = get_flask_database_connection(app)
         repository = UserRepository(connection)
-        users = repository.all()
-        for user in users:
-            if user.user_name == form.username.data and bcrypt.check_password_hash(user.user_password, form.password.data):
-                login_user(user)
+        user = repository.find_by_name(form.username.data)
+        if user:
+            if bcrypt.check_password_hash(user.user_password, form.password.data):
                 return redirect(url_for('login_page'))
-        flash('Invalid username or password', 'danger')  
     return render_template('index.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def login_page():
     return render_template('login.html')
 
@@ -48,7 +46,6 @@ def register_page():
         connection = get_flask_database_connection(app)
         repository = UserRepository(connection)
         hashed_password = bcrypt.generate_password_hash(form.password.data) 
-        print(f'Hashed Password: {hashed_password}')
         new_user = User(None, user_name=form.username.data, user_password=hashed_password)
         repository.create(new_user)
         return redirect(url_for('main_page'))

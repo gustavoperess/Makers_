@@ -32,6 +32,19 @@ def test_find_single_user(db_connection):
     
 
 """
+When we call UserRepository#find
+We find a user from the database by name.
+"""
+
+def test_find_user_by_name(db_connection):
+    db_connection.seed("seeds/users.sql")  # Seed our database with some test data
+    repository = UserRepository(db_connection)  # Create a new ArtistRepository
+
+    user = repository.find_by_name("Gustavo")
+    assert user == User(1, "Gustavo", "Gustavo123")
+
+
+"""
 When we call UserRepository#create
 We create a record from the database.
 """
