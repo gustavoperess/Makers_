@@ -35,6 +35,8 @@ class UserRepository:
             return User(row['id'], row['user_name'], row['user_password'])
         else:
             return None
+        
+        
 
     def create(self, user):
         user_already_exist = self.find_by_name(user.user_name)

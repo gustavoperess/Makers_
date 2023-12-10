@@ -51,12 +51,19 @@
     
     {% if all %}
       {% for all_post in all %}
+        {% for users in all_users %}
+         {% if users.id == all_post.user_id %}
         <div class="post-container">
+          <h1 class="post-username">{{ users.user_name }}</h1>
           <h1 class="post-title">{{ all_post.title }}</h1>
           <p class="post-content">{{ all_post.content }}</p>
-        </div>  
+          <p class="post-content">{{ all_post.user_id }}</p>
+        </div> 
+          {% endif %}
+        {% endfor %}
       {% endfor %}
     {% endif %}
+
     <a href="{{url_for('main_page')}}" class="logout-link">Log out</a>
 </body>
 </html>
