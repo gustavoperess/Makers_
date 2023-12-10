@@ -6,9 +6,10 @@
   <body>
    <h1>Welcome back {{current_user.user_name }}</h1>
     <h2>Please see your Chitters below</h2>    
-    <h1>{{ current_user.posts.title }}</h1>
-    <h1>{{ current_user.posts.content }}</h1>
-    <h1>{{ current_user.posts.number_views }}</h1>
+    {% for post in current_user.posts %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    {% endfor %}
     <a href="{{url_for('main_page')}}">Log out</a>
   </body>
 </html>

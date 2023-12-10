@@ -13,12 +13,25 @@ def test_get_all_records(db_connection):
         Post(3, "title03", "content03", 45, 2),
     ]
 
-def test_to_check_for_a_single_album(db_connection):
+def test_to_find_a_single_post(db_connection):
     db_connection.seed("seeds/users.sql")
     a_repository = PostRepository(db_connection)
     
-    albums = a_repository.find(2)
+    albums = a_repository.find_single_post(2)
     assert albums == Post(2, "title02", "content02", 245, 1)
+
+
+def test_to_find_all_posts_by_user(db_connection):
+    db_connection.seed("seeds/users.sql")
+    a_repository = PostRepository(db_connection)
+    
+    albums = a_repository.find_all_posts_by_user(1)
+    assert albums == [
+        Post(1, 'title01', 'content01', 145, 1),
+        Post(2, 'title02', 'content02', 245, 1)
+        ]
+
+
 
 def test_to_create(db_connection):
     db_connection.seed("seeds/users.sql")

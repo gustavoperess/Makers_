@@ -17,13 +17,26 @@ class PostRepository:
         return posts
     
     
-    def find(self, user_id):
-        rows = self.connection.execute('SELECT * from posts WHERE user_id = %s', [user_id])
+    def find_single_post(self, id):
+        rows = self.connection.execute('SELECT * from posts WHERE id = %s', [id])
         if rows:
             row = rows[0]
             return Post(row['id'], row["post_title"], row["post_content"], row["post_number_of_views"], row["user_id"])
         else:
            return None
+       
+       
+    def find_all_posts_by_user(self, user_id):
+        rows = self.connection.execute('SELECT * from posts WHERE user_id = %s', [user_id])
+        posts = []
+        if rows:
+            for row in rows:
+                post = Post(row['id'], row["post_title"], row["post_content"], row["post_number_of_views"], row["user_id"])
+                posts.append(post)
+            return posts
+        else:
+           return None
+       
     
     def create(self, post):
         self.connection.execute(

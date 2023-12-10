@@ -27,7 +27,7 @@ def load_user(user_id):
 
     # Load post information
     post_repository = PostRepository(connection)
-    posts = post_repository.find(int(user_id))
+    posts = post_repository.find_all_posts_by_user(int(user_id))
     
     if user:
         user.posts = posts
