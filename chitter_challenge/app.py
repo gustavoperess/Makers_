@@ -29,6 +29,7 @@ def load_user(user_id):
     # Load post information
     post_repository = PostRepository(connection)
     posts = post_repository.find_all_posts_by_user(int(user_id))
+
     
     if user:
         user.posts = posts
@@ -53,27 +54,30 @@ def main_page():
 @app.route('/login', methods=['GET', 'POST'])
 @login_required
 def login_page():
-    if request.method == 'POST':
-        connection = get_flask_database_connection(app)
-        repository = PostRepository(connection)
-        title = request.form["title"]
-        content = request.form["content"]
-        post = Post(None, title, content, 12, current_user.id)
-        new_post = repository.create(post)
-        
-        # Redirect to the login page after creating a new post
-        return redirect(url_for('login_page'))
-    
     if not current_user.posts:
         flash("User does not have any posts yet")
-              
+    
+    if request.method == 'POST':
+        if 'title' in request.form and 'content' in request.form:
+            connection = get_flask_database_connection(app)
+            repository = PostRepository(connection)
+            title = request.form["title"]
+            content = request.form["content"]
+            post = Post(None, title, content, 12, current_user.id)
+            new_post = repository.create(post)
+
+            # Redirect to the login page after creating a new post
+            return redirect(url_for('login_page'))
+        
+    if request.method == 'POST' and 'delete_post' in request.form:
+        post_id_to_delete = int(request.form['delete_post'])
+        connection = get_flask_database_connection(app)
+        new_repo = PostRepository(connection)
+        new_repo.delete(post_id_to_delete)
+        
+        return redirect(url_for('login_page'))
+               
     return render_template('login.html', user=current_user)
-
-
-@app.route('/login/new', methods=['GET', 'POST'])
-def new_page():        
-    return render_template('new.html')
-
 
 
 @app.route('/logout', methods=['GET', 'POST'])
