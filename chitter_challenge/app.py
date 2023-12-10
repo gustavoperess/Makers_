@@ -54,6 +54,10 @@ def main_page():
 @app.route('/login', methods=['GET', 'POST'])
 @login_required
 def login_page():
+    connection = get_flask_database_connection(app)
+    repository = PostRepository(connection)
+    all = repository.all()
+    
     if not current_user.posts:
         flash("User does not have any posts yet")
     
@@ -77,7 +81,7 @@ def login_page():
         
         return redirect(url_for('login_page'))
                
-    return render_template('login.html', user=current_user)
+    return render_template('login.html', user=current_user, all=all)
 
 
 @app.route('/logout', methods=['GET', 'POST'])
