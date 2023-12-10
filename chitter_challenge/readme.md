@@ -4,6 +4,7 @@ Overview
 Chitter is a simple social media platform built using Python and the Flask web framework. It provides basic user authentication,
 allowing users to register, log in, create posts, and delete their own posts.
 
+![Screenshot 2023-12-10 at 6 50 45 PM](https://github.com/gustavoperess/Makers_/assets/32426662/28cdb578-fb10-4246-ae93-80b3a9cc464d)
 
 Technologies Used
 Languages:
