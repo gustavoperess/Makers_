@@ -52,7 +52,12 @@ def main_page():
 @app.route('/login', methods=['GET', 'POST'])
 @login_required
 def login_page():
-    return render_template('login.html')
+    connection = get_flask_database_connection(app)
+    
+    if not current_user.posts:
+        flash("User does not have any posts yet")
+        
+    return render_template('login.html', user=current_user)
 
 
 @app.route('/logout', methods=['GET', 'POST'])

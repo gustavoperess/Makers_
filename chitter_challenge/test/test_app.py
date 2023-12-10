@@ -16,8 +16,7 @@ def test_register_page(page, test_web_address, db_connection):
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text('Welcome to Chitter')
 
-# IN ORDER TO MAKE THIS TEST WORK NEED TO FILL THE PAGE WITH A NEW USER
-@pytest.mark.skip(reason="New user needs to be created in order to make this test work")
+
 def test_login_page(page, test_web_address, db_connection):
     db_connection.seed("seeds/users.sql")
     page.goto(f"http://{test_web_address}/")
