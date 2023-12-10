@@ -37,7 +37,7 @@
                 <h1 class="post-username">{{ user.user_name }}</h1>
                 <h1 class="post-title">{{ post.title }}</h1>
                 <p class="post-content">{{ post.content }}</p>
-                <p class="post-content">{{ post.post_time }}</p>
+                <p class="post-time">{{ post.post_time }}</p>
               <form method="POST" action="/login">
                   <input type="hidden" name="delete_post" value="{{ post.id }}">
                   <input type="submit" value="Delete">
@@ -57,6 +57,7 @@
           <h1 class="post-username">{{ users.user_name }}</h1>
           <h1 class="post-title">{{ all_post.title }}</h1>
           <p class="post-content">{{ all_post.content }}</p>
+          <p class="post-time">{{ all_post.post_time }}</p>
         </div> 
           {% endif %}
         {% endfor %}

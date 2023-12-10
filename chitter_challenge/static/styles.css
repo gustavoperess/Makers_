@@ -133,3 +133,12 @@ a.logout-link:hover {
   top: 5px;
   left: 5px;
 }
+
+.post-time {
+  font-size: 0.8em; /* Adjust font size */
+  color: #337ab7;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
