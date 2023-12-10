@@ -9,7 +9,7 @@ from lib.forms import LoginForm, RegisterForm
 from flask_bcrypt import Bcrypt
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 bcrypt = Bcrypt(app)
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 
@@ -52,7 +52,6 @@ def main_page():
 @app.route('/login', methods=['GET', 'POST'])
 @login_required
 def login_page():
-    connection = get_flask_database_connection(app)
     
     if not current_user.posts:
         flash("User does not have any posts yet")
