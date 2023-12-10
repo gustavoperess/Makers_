@@ -8,15 +8,15 @@ allowing users to register, log in, create posts, and delete their own posts.
 
 Technologies Used
 Languages:
-Python
+ Python
 
 Frameworks:
-Flask
-Flask-Login
-Flask-Bcrypt
+  Flask
+  Flask-Login
+  Flask-Bcrypt
 
 Database:
-PostgressSQL
+  PostgressSQL
 
 Setup - Prerequisites
 ```
