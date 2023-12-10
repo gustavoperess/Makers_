@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Chitter Login page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h1>Welcome back {{ user.user_name }}</h1>
@@ -32,13 +33,14 @@
 
     {% if user.posts %}
         {% for post in user.posts %}
-            <h1>{{ post.title }}</h1>
-            <p>{{ post.content }}</p>
+            <div class="post-container">
+                <h1 class="post-title">{{ post.title }}</h1>
+                <p class="post-content">{{ post.content }}</p>
+            </div>
         {% endfor %}
     {% else %}
         <p>No posts yet.</p>
     {% endif %}
-
     <a href="{{url_for('main_page')}}">Log out</a>
 </body>
 </html>

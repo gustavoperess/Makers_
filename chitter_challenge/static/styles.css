@@ -10,6 +10,7 @@ body {
 
 h1 {
   color: #333;
+  margin-bottom: 20px; /* Added margin-bottom */
 }
 
 form {
@@ -22,17 +23,17 @@ form {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="submit"] {
   width: 100%;
-  padding: 10px;
-  margin: 8px 0;
   box-sizing: border-box;
+  margin: 8px 0;
+  padding: 10px;
 }
 
 input[type="submit"] {
   background-color: #4caf50;
   color: white;
-  padding: 10px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -54,8 +55,8 @@ a {
   color: #337ab7;
 }
 
-h1 {
-  margin-bottom: 20px;
+a:hover {
+  text-decoration: underline;
 }
 
 a.register-link {
@@ -66,4 +67,25 @@ a.register-link {
 
 a.register-link:hover {
   text-decoration: underline;
+}
+
+.post-container {
+  margin: 20px auto;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.post-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.post-content {
+  font-size: 1.2em;
+  line-height: 1.4;
 }
