@@ -1,5 +1,5 @@
 from lib.post import Post
-from datetime import datetime
+
 
 
 class PostRepository:
@@ -13,7 +13,7 @@ class PostRepository:
         
         posts = []
         for row in rows:
-            post = Post(row['id'], row["post_title"], row["post_content"], row["post_number_of_views"], row["user_id"])
+            post = Post(row['id'], row["post_title"], row["post_content"], row["post_number_of_views"], row["post_time"], row["user_id"])
             posts.append(post)
        
         return posts
@@ -23,7 +23,7 @@ class PostRepository:
         rows = self.connection.execute('SELECT * from posts WHERE id = %s', [id])
         if rows:
             row = rows[0]
-            return Post(row['id'], row["post_title"], row["post_content"], row["post_number_of_views"], row["user_id"])
+            return Post(row['id'], row["post_title"], row["post_content"], row["post_number_of_views"], row["post_time"], row["user_id"])
         else:
            return None
        
@@ -33,7 +33,7 @@ class PostRepository:
         posts = []
         if rows:
             for row in rows:
-                post = Post(row['id'], row["post_title"], row["post_content"], row["post_number_of_views"], row["user_id"])
+                post = Post(row['id'], row["post_title"], row["post_content"], row["post_number_of_views"],row["post_time"], row["user_id"])
                 posts.append(post)
             return posts
         else:
@@ -42,8 +42,8 @@ class PostRepository:
     
     def create(self, post):
         self.connection.execute(
-            "INSERT INTO posts (post_title, post_content, post_number_of_views, user_id) VALUES (%s, %s, %s, %s)",
-            [post.title, post.content, post.number_views, post.user_id]
+            "INSERT INTO posts (post_title, post_content, post_number_of_views, post_time, user_id) VALUES (%s, %s, %s, %s, %s)",
+            [post.title, post.content, post.number_views, post.post_time, post.user_id]
         )
         return None
     
@@ -56,6 +56,6 @@ class PostRepository:
     
     def update(self, post):
         self.connection.execute(
-            "UPDATE posts SET post_title = %s, post_content =%s, post_number_of_views =%s, user_id =%s WHERE id= %s",
-            [post.id, post.title, post.content, post.number_views, post.user_id]
+            "UPDATE posts SET post_title = %s, post_content =%s, post_number_of_views =%s, post_time =%s, user_id =%s WHERE id= %s",
+            [post.id, post.title, post.content, post.number_views, post.post_time, post.user_id]
         )

@@ -8,7 +8,7 @@ from flask_login import login_user, LoginManager, login_required, logout_user, c
 from lib.user import User
 from lib.forms import LoginForm, RegisterForm
 from flask_bcrypt import Bcrypt
-
+from datetime import datetime
 
 app = Flask(__name__, static_url_path='/static')
 bcrypt = Bcrypt(app)
@@ -70,7 +70,9 @@ def login_page():
             repository = PostRepository(connection)
             title = request.form["title"]
             content = request.form["content"]
-            post = Post(None, title, content, 12, current_user.id)
+            now = datetime.now()
+            dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+            post = Post(None, title, content, 12, dt_string, current_user.id)
             new_post = repository.create(post)
 
             # Redirect to the login page after creating a new post

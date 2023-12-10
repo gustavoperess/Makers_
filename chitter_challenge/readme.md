@@ -22,7 +22,7 @@ Setup - Prerequisites
 # Install dependencies:
 pip install -r requirements.txt
 
-#Set up the Flask application
+# Set up the Flask application
 export FLASK_APP=app.py
 export FLASK_ENV=development  # Optional: enables development mode with debug features
 
