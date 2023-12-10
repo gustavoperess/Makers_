@@ -52,12 +52,11 @@
     {% if all %}
       {% for all_post in all %}
         {% for users in all_users %}
-         {% if users.id == all_post.user_id %}
+         {% if users.id == all_post.user_id and users.user_name != user.user_name%}
         <div class="post-container">
           <h1 class="post-username">{{ users.user_name }}</h1>
           <h1 class="post-title">{{ all_post.title }}</h1>
           <p class="post-content">{{ all_post.content }}</p>
-          <p class="post-content">{{ all_post.user_id }}</p>
         </div> 
           {% endif %}
         {% endfor %}
