@@ -19,16 +19,15 @@ PostgressSQL
 
 Setup - Prerequisites
 ```
-#Install dependencies:
+# Install dependencies:
 pip install -r requirements.txt
 
 #Set up the Flask application
 export FLASK_APP=app.py
 export FLASK_ENV=development  # Optional: enables development mode with debug features
 
-#Run the application:
+# Run the application:
 flask run
-
 
 ```
 Below is the user story
