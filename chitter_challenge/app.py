@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from lib.database_connection import get_flask_database_connection
 from lib.user_repository import UserRepository
 from lib.post_repository import PostRepository
+from lib.post import Post
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from lib.user import User
 from lib.forms import LoginForm, RegisterForm
@@ -52,11 +53,27 @@ def main_page():
 @app.route('/login', methods=['GET', 'POST'])
 @login_required
 def login_page():
+    if request.method == 'POST':
+        connection = get_flask_database_connection(app)
+        repository = PostRepository(connection)
+        title = request.form["title"]
+        content = request.form["content"]
+        post = Post(None, title, content, 12, current_user.id)
+        new_post = repository.create(post)
+        
+        # Redirect to the login page after creating a new post
+        return redirect(url_for('login_page'))
     
     if not current_user.posts:
         flash("User does not have any posts yet")
-        
+              
     return render_template('login.html', user=current_user)
+
+
+@app.route('/login/new', methods=['GET', 'POST'])
+def new_page():        
+    return render_template('new.html')
+
 
 
 @app.route('/logout', methods=['GET', 'POST'])

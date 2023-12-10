@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>Chitter Login page</title>
-  </head>
-  <body>
+</head>
+<body>
     <h1>Welcome back {{ user.user_name }}</h1>
     <h2>Please see your Chitters below</h2>
+    <h2>Create a new post</h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/login">
+        <p>
+            <label for="title">Post Title</label><br>
+            <input type="text" name="title" id="title">
+        </p>
+        <p>
+            <label for="content">Post content</label><br>
+            <input type="text" name="content" id="content">
+        </p>
+        <input type="submit" value="Add Content">
+    </form>
 
     {% if user.posts %}
-      {% for post in user.posts %}
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.content }}</p>
-      {% endfor %}
+        {% for post in user.posts %}
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.content }}</p>
+        {% endfor %}
     {% else %}
-      <p>No posts yet.</p>
+        <p>No posts yet.</p>
     {% endif %}
-    
+
     <a href="{{url_for('main_page')}}">Log out</a>
-  </body>
+</body>
 </html>
