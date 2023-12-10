@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from lib.database_connection import get_flask_database_connection
 from lib.user_repository import UserRepository
+from lib.post_repository import PostRepository
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from lib.user import User
 from lib.forms import LoginForm, RegisterForm
@@ -19,8 +20,19 @@ login_manager.login_view = "login_page"
 @login_manager.user_loader
 def load_user(user_id):
     connection = get_flask_database_connection(app)
-    repository = UserRepository(connection)
-    return repository.find(int(user_id))
+    
+    # Load user information
+    user_repository = UserRepository(connection)
+    user = user_repository.find(int(user_id))
+
+    # Load post information
+    post_repository = PostRepository(connection)
+    posts = post_repository.find(int(user_id))
+    
+    if user:
+        user.posts = posts
+    
+    return user
 
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
