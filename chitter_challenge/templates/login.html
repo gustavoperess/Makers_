@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Welcome back {{ user.user_name }}</h1>
+    <h1 >Welcome back {{ user.user_name }}</h1>
     <h2>Please see your Chitters below</h2>
     <h2>Create a new post</h2>
 
@@ -34,7 +34,7 @@
     {% if user.posts %}
         {% for post in user.posts %}
             <div class="post-container">
-              {{user.user_name}}
+                <h1 class="post-username">{{ user.user_name }}</h1>
                 <h1 class="post-title">{{ post.title }}</h1>
                 <p class="post-content">{{ post.content }}</p>
 

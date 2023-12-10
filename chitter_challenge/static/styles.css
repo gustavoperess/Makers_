@@ -82,6 +82,7 @@ a.register-link:hover {
 }
 
 .post-container {
+  position: relative;
   margin: 20px auto;
   max-width: 600px;
   background-color: #fff;
@@ -90,6 +91,7 @@ a.register-link:hover {
   padding: 15px;
   margin-bottom: 20px;
 }
+
 
 .post-title {
   font-size: 1.5em;
@@ -112,4 +114,22 @@ a.logout-link {
 
 a.logout-link:hover {
   text-decoration: underline;
+}
+
+.user-name {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: #337ab7;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.post-username {
+  font-size: 0.8em; /* Adjust font size */
+  color: #337ab7;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
