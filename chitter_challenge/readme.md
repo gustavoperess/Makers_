@@ -1,6 +1,36 @@
-In this challenge I am writing a small Twitter clone that will allow the users to post messages to a public stream.
-Requirments - A database (SQL), psycopg package and the repository classes. Flask, Pytest, HTML. 
+Chitter Social Media Platform Documentation
 
+Overview
+Chitter is a simple social media platform built using Python and the Flask web framework. It provides basic user authentication,
+allowing users to register, log in, create posts, and delete their own posts.
+
+
+Technologies Used
+Languages:
+Python
+
+Frameworks:
+Flask
+Flask-Login
+Flask-Bcrypt
+
+Database:
+PostgressSQL
+
+Setup - Prerequisites
+```
+#Install dependencies:
+pip install -r requirements.txt
+
+#Set up the Flask application
+export FLASK_APP=app.py
+export FLASK_ENV=development  # Optional: enables development mode with debug features
+
+#Run the application:
+flask run
+
+
+```
 Below is the user story
 
 ```
