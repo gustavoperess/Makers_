@@ -117,4 +117,4 @@ def register_page():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=4321, ssl_context=('localhost.pem', 'localhost-key.pem'))
+    app.run(debug=True, port=int(os.environ.get('PORT', 5001)))
